@@ -104,17 +104,25 @@ module uvmt_cva6_tb;
       .rvfi_mem_rmask (rvfi_if.rvfi_o[i].mem_rmask),
       .rvfi_mem_wdata (rvfi_if.rvfi_o[i].mem_wdata),
       .rvfi_mem_wmask (rvfi_if.rvfi_o[i].mem_wmask)
+// Temp edit Additional pins
+      // .rvfi_rd2_wdata (rvfi_if.rvfi_o[i].rd2_wdata ),
+      // .rvfi_rd2_addr  (rvfi_if.rvfi_o[i].rd2_addr  ),
+      // .rvfi_rs3_rdata (rvfi_if.rvfi_o[i].rs3_rdata ),
+      // .rvfi_rs3_addr  (rvfi_if.rvfi_o[i].rs3_addr  ),
+      // .rvfi_nmip      (rvfi_if.rvfi_o[i].nmip      ),
+      // .rvfi_dbg_mode  (rvfi_if.rvfi_o[i].dbg_mode  ),
+      // .rvfi_dbg       (rvfi_if.rvfi_o[i].dbg       )
       );
    end
 
    for (genvar i = 0; i < RVFI_NRET; i++) begin  : rvfi_csr_if
       uvma_rvfi_csr_if#(uvme_cva6_pkg::XLEN)   rvfi_csr_if_inst (
-      //   .clk            (clknrst_if.clk),
-      //   .reset_n        (clknrst_if.reset_n),
-      //   .rvfi_csr_rmask (rvfi_if.rvfi_o[i].mem_rmask),
-      //   .rvfi_csr_wmask (rvfi_if.rvfi_o[i].mem_wmask),
-      //   .rvfi_csr_rdata (rvfi_if.rvfi_o[i].mem_rdata),
-      //   .rvfi_csr_wdata (rvfi_if.rvfi_o[i].mem_wdata)
+        .clk            (clknrst_if.clk),
+        .reset_n        (clknrst_if.reset_n),
+        .rvfi_csr_rmask (rvfi_if.rvfi_o[i].mem_rmask),
+        .rvfi_csr_wmask (rvfi_if.rvfi_o[i].mem_wmask),
+        .rvfi_csr_rdata (rvfi_if.rvfi_o[i].mem_rdata),
+        .rvfi_csr_wdata (rvfi_if.rvfi_o[i].mem_wdata)
       ); //ToDo: Temp edit
    end
     uvmt_default_inputs_intf         default_inputs_vif();
