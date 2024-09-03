@@ -82,7 +82,7 @@ covergroup cg_axi_ar_order(string name)
    }
 
    ar_axi_outstanding_cross: cross outstanding_resp, outstanding_last_resp, arid1, arlen1, arid2, arlen2{
-      ignore_bins IGN_CROSS1 = binsof(outstanding_resp) intersect{1} && 
+      ignore_bins IGN_CROSS1 = binsof(outstanding_resp) intersect{1} &&
                                binsof(outstanding_last_resp) intersect{1};
    }
 
@@ -90,16 +90,16 @@ covergroup cg_axi_ar_order(string name)
       ignore_bins IGN_CROSS1 = binsof(outoforder_resp_id0) intersect{1} &&
                                binsof(outoforder_last_resp_id0) intersect{0} &&
                                binsof(arlen2) intersect{0};
-      ignore_bins IGN_CROSS2 = binsof(outoforder_resp_id0) intersect{0} && 
+      ignore_bins IGN_CROSS2 = binsof(outoforder_resp_id0) intersect{0} &&
                                binsof(outoforder_last_resp_id0) intersect{1} &&
                                binsof(arlen1) intersect{0};
    }
 
    aw_axi_outoforder_id1_cross: cross outoforder_resp_id1, outoforder_last_resp_id1, arlen1, arlen2{
-      ignore_bins IGN_CROSS1 = binsof(outoforder_resp_id1) intersect{1} && 
+      ignore_bins IGN_CROSS1 = binsof(outoforder_resp_id1) intersect{1} &&
                                binsof(outoforder_last_resp_id1) intersect{0} &&
                                binsof(arlen2) intersect{0};
-      ignore_bins IGN_CROSS2 = binsof(outoforder_resp_id1) intersect{0} && 
+      ignore_bins IGN_CROSS2 = binsof(outoforder_resp_id1) intersect{0} &&
                                binsof(outoforder_last_resp_id1) intersect{1} &&
                                binsof(arlen1) intersect{0};
    }
@@ -119,7 +119,7 @@ class uvme_axi_ext_covg_c extends uvm_component;
    int t_r1l_to_ar;  // <0 (outstanding)
    int t_r1_to_r2;   // <0 (r2 run before r1)
    int t_r1l_to_r2l; // <0 (last r2 run before last r1)
-   
+
    int write_resp_status = 0;
    int read_resp_status  = 0;
 
@@ -191,7 +191,7 @@ endclass : uvme_axi_ext_covg_c
 function uvme_axi_ext_covg_c::new(string name="uvme_axi_ext_covg", uvm_component parent=null);
 
    super.new(name, parent);
-
+   $display("uvme_axi_ext_covg_c is running here");
 endfunction : new
 
 function void uvme_axi_ext_covg_c::build_phase(uvm_phase phase);
@@ -219,7 +219,7 @@ task uvme_axi_ext_covg_c::run_phase(uvm_phase phase);
         get_ar_item();
         get_r_item();
      join_any
-     
+
      if(aw_trs_fifo.size() == 2 && write_resp_status == 2) begin
         aw_time_operations();
         aw_axi_order_cg.sample(t_b1_to_aw, t_w1_to_aw);
@@ -233,7 +233,7 @@ task uvme_axi_ext_covg_c::run_phase(uvm_phase phase);
         ar_trs_fifo = new [ar_trs_fifo.size()-1] (ar_trs_fifo);
         read_resp_status--;
      end
-     
+
      disable fork;
    end
 
@@ -243,7 +243,10 @@ endtask : run_phase
 task uvme_axi_ext_covg_c::get_aw_item();
 
    uvma_axi_transaction_c  aw_item;
+   $display("get_aw_item started");
+   $display("uvme_axi_cov_aw_req_fifo : %p",uvme_axi_cov_aw_req_fifo.size());
    uvme_axi_cov_aw_req_fifo.get(aw_item);
+   $display("aw_item is receieved");
    `uvm_info(get_type_name(), $sformatf("WRITE REQ ITEM DETECTED"), UVM_LOW)
    aw_trs_fifo = new [aw_trs_fifo.size()+1] (aw_trs_fifo);
    aw_trs_fifo[aw_trs_fifo.size()-1] = new aw_item;
@@ -265,7 +268,9 @@ endtask : get_ar_item
 task uvme_axi_ext_covg_c::get_b_item();
 
    uvma_axi_transaction_c  b_item;
+   $display("get_b_item started");
    uvme_axi_cov_b_resp_fifo.get(b_item);
+   $display("b_item is receieved");
    `uvm_info(get_type_name(), $sformatf("WRITE RESP ITEM DETECTED"), UVM_LOW)
    foreach(aw_trs_fifo[i]) begin
       if (aw_trs_fifo[i].m_id == b_item.m_id) begin
