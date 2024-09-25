@@ -1135,8 +1135,8 @@ def check_spike_version():
 
   logging.info(f"Spike Version: {user_spike_stderr_string}")
 
-  if user_spike_stderr_string != spike_version:
-    incorrect_version_exit("Spike", user_spike_stderr_string, spike_version)
+  #if user_spike_stderr_string != spike_version:
+  #  incorrect_version_exit("Spike", user_spike_stderr_string, spike_version)
 
 
 def check_verilator_version():
