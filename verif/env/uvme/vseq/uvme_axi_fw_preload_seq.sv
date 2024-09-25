@@ -48,8 +48,11 @@ task uvme_axi_fw_preload_seq_c::body();
 
    void'(uvcl.get_arg_value("+elf_file=", binary));
 
+
    if (binary != "") begin
+      $display("binary string 001: %s",binary);
       read_elf(binary);
+      $display("binary string: %s",binary);
       wait(p_sequencer.cntxt.axi_vi.clk);
       // while there are more sections to process
       while (get_section(address, len)) begin

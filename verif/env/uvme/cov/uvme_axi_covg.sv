@@ -274,7 +274,7 @@ task uvme_axi_covg_c::run_phase(uvm_phase phase);
       end
 
       if(ar_item != null) begin
-         `uvm_info(get_type_name(), $sformatf("READ ADDRESS ITEM DETECTED"), UVM_LOW)
+         `uvm_info(get_type_name(), $sformatf("READ ADDRESS ITEM DETECTED YY"), UVM_LOW)
          ar_axi_cg.sample(ar_item, RVA, HPDCache);
       end
 

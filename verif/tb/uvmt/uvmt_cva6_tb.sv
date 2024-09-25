@@ -481,6 +481,12 @@ module uvmt_cva6_tb;
          $display("    ----------------------------------------------------------");
       end
       else begin
+         //Temp edit Check the error codes
+         $display("sim_finished :%p",sim_finished );
+         $display("test_exit_code  :%p",test_exit_code );
+         $display("err_count  :%p",err_count );
+         $display("fatal_count  :%p",fatal_count );
+
          $display("    FFFFFFFF   AAAAAA   IIIIII  LL        EEEEEEEE  DDDDDDD       ");
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
@@ -489,6 +495,7 @@ module uvmt_cva6_tb;
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA  IIIIII  LLLLLLLL  EEEEEEEE  DDDDDDD       ");
          $display("    ----------------------------------------------------------");
+
          if (sim_finished == 0) begin
             $display("                   SIMULATION FAILED - ABORTED              ");
          end

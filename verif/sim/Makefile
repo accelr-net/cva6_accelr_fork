@@ -364,12 +364,13 @@ questa_uvm_run:
 	  -sv_lib $(SPIKE_INSTALL_DIR)/lib/libfesvr \
 	  -sv_lib $(SPIKE_INSTALL_DIR)/lib/libdisasm \
 	  -sv_lib $(QUESTASIM_HOME)/uvm-1.2/linux_x86_64/uvm_dpi \
-	  -c -do "add wave -r sim:/uvmt_cva6_tb/cva6_dut_wrap/cva6_tb_wrapper_i/i_cva6/ex_stage_i/lsu_i/gen_mmu/i_cva6_mmu/i_pmp_data/*; " \
-		-do "run 10000; " \
-	  -work $(VSIM_WORK_DIR) -t 1ns \
-	  -suppress vsim-8451 \
-	  -suppress 3829 -suppress vsim-8386\
+		-c -do "add wave -position insertpoint sim:/uvmt_cva6_tb/cva6_dut_wrap/cva6_tb_wrapper_i/i_cva6/gen_cache_wt/i_cache_subsystem/i_adapter/*" \
+		-do "run -all; " \
+		-work $(VSIM_WORK_DIR) -t 1ns \
+		-suppress vsim-8451 \
+		-suppress 3829 -suppress vsim-8386\
 	  +permissive \
+		+elf_file=$(elf) \
 	  +UVM_TESTNAME=uvmt_cva6_firmware_test_c	\
 	  -sv_seed 0 \
 	  $(cov-run-opt) $(issrun_opts) \
