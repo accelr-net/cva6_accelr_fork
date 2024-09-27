@@ -374,6 +374,7 @@ task uvme_cva6_env_c::run_phase(uvm_phase phase);
       begin
          if(cfg.axi_cfg.is_active == UVM_ACTIVE) begin
             uvma_axi_vseq_c  axi_vseq;
+            $display("axi_vseq start");
             axi_vseq = uvma_axi_vseq_c::type_id::create("axi_vseq");
             axi_vseq.start(axi_agent.vsequencer);
          end
