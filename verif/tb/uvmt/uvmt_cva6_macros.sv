@@ -19,12 +19,6 @@
 `ifndef __UVMT_CVA6_MACROS_SV__
 `define __UVMT_CVA6_MACROS_SV__
 
-
-
-//#####################################################################################################################################
-//Temp edit
-//#####################################################################################################################################
-
 // Assign for RVFI CSR interface
 `define RVFI_CSR_ASSIGN(csr_name) \
    for (genvar i = 0; i < RVFI_NRET; i++) begin : rvfi_csr_if_blk_``csr_name``\
@@ -56,5 +50,5 @@ uvm_config_db#(virtual uvma_rvfi_csr_if)::set(.cntxt(null), \
                                               .inst_name("*"), \
                                               .field_name({"csr_", `"csr_name`", "_vif", $sformatf("%0d", ``idx``)}), \
                                               .value(rvfi_csr_if_blk_``csr_name``[``idx``].rvfi_csr_``csr_name``_if)); \
- 
+
 `endif // __UVMT_CVA6_MACROS_SV__

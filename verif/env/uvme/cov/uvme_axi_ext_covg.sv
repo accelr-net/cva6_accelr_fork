@@ -191,7 +191,6 @@ endclass : uvme_axi_ext_covg_c
 function uvme_axi_ext_covg_c::new(string name="uvme_axi_ext_covg", uvm_component parent=null);
 
    super.new(name, parent);
-   $display("uvme_axi_ext_covg_c is running here");
 endfunction : new
 
 function void uvme_axi_ext_covg_c::build_phase(uvm_phase phase);
@@ -267,7 +266,6 @@ endtask : get_ar_item
 task uvme_axi_ext_covg_c::get_b_item();
 
    uvma_axi_transaction_c  b_item;
-   $display("get_b_item started");
    uvme_axi_cov_b_resp_fifo.get(b_item);
    `uvm_info(get_type_name(), $sformatf("WRITE RESP ITEM DETECTED"), UVM_HIGH)
    foreach(aw_trs_fifo[i]) begin

@@ -33,7 +33,7 @@ class uvme_cva6_cfg_c extends uvma_core_cntrl_cfg_c;
 
    rand bit                      scoreboard_enabled;
    rand bit                      tandem_enabled;
-   rand bit                      cov_model_enabled ; //Temp edit
+   rand bit                      cov_model_enabled;
    rand bit                      trn_log_enabled;
    rand int unsigned             sys_clk_period;
 
