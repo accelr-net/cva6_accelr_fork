@@ -355,6 +355,7 @@ questa_uvm_comp:
 
 questa_uvm_run:
 	@echo "[QUESTA] Running Model"
+	echo $(elf)
 	vsim -64  \
 	  $(COMMON_RUN_UVM_FLAGS) \
 	  -sv_lib $(SPIKE_INSTALL_DIR)/lib/libyaml-cpp \
