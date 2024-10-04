@@ -191,6 +191,7 @@ endclass : uvme_axi_ext_covg_c
 function uvme_axi_ext_covg_c::new(string name="uvme_axi_ext_covg", uvm_component parent=null);
 
    super.new(name, parent);
+
 endfunction : new
 
 function void uvme_axi_ext_covg_c::build_phase(uvm_phase phase);

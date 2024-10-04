@@ -71,12 +71,8 @@ module uvmt_cva6_tb;
 
    uvmt_axi_switch_intf         axi_switch_vif();
    uvme_cva6_core_cntrl_if      core_cntrl_if();
-   // uvma_rvfi_instr_if #(
-   //   uvme_cva6_pkg::ILEN,
-   //   uvme_cva6_pkg::XLEN
-   // ) rvfi_instr_if [RVFI_NRET-1:0] ();
 
-   for (genvar i = 0; i < RVFI_NRET; i++) begin : rvfi_instr_if //ToDo: Temp edit
+   for (genvar i = 0; i < RVFI_NRET; i++) begin : rvfi_instr_if
       uvma_rvfi_instr_if #(
         uvme_cva6_pkg::ILEN,
         uvme_cva6_pkg::XLEN
@@ -103,15 +99,15 @@ module uvmt_cva6_tb;
       .rvfi_mem_rdata (rvfi_if.rvfi_o[i].mem_rdata),
       .rvfi_mem_rmask (rvfi_if.rvfi_o[i].mem_rmask),
       .rvfi_mem_wdata (rvfi_if.rvfi_o[i].mem_wdata),
-      .rvfi_mem_wmask (rvfi_if.rvfi_o[i].mem_wmask)
-// Temp edit Additional pins
-      // .rvfi_rd2_wdata (rvfi_if.rvfi_o[i].rd2_wdata ),
-      // .rvfi_rd2_addr  (rvfi_if.rvfi_o[i].rd2_addr  ),
-      // .rvfi_rs3_rdata (rvfi_if.rvfi_o[i].rs3_rdata ),
-      // .rvfi_rs3_addr  (rvfi_if.rvfi_o[i].rs3_addr  ),
-      // .rvfi_nmip      (rvfi_if.rvfi_o[i].nmip      ),
-      // .rvfi_dbg_mode  (rvfi_if.rvfi_o[i].dbg_mode  ),
-      // .rvfi_dbg       (rvfi_if.rvfi_o[i].dbg       )
+      .rvfi_mem_wmask (rvfi_if.rvfi_o[i].mem_wmask),
+
+      .rvfi_rd2_wdata (                           ),
+      .rvfi_rd2_addr  (                           ),
+      .rvfi_rs3_rdata (                           ),
+      .rvfi_rs3_addr  (                           ),
+      .rvfi_nmip      (                           ),
+      .rvfi_dbg_mode  (                           ),
+      .rvfi_dbg       (                           )
       );
    end
 
@@ -123,7 +119,7 @@ module uvmt_cva6_tb;
         .rvfi_csr_wmask (rvfi_if.rvfi_o[i].mem_wmask),
         .rvfi_csr_rdata (rvfi_if.rvfi_o[i].mem_rdata),
         .rvfi_csr_wdata (rvfi_if.rvfi_o[i].mem_wdata)
-      ); //ToDo: Temp edit
+      );
    end
     uvmt_default_inputs_intf         default_inputs_vif();
 
@@ -172,32 +168,6 @@ module uvmt_cva6_tb;
                     .rvfi_o(rvfi_if.rvfi_o),
                     .rvfi_csr_o(rvfi_if.rvfi_csr_o)
                     );
-
-   // for (genvar i = 0; i < RVFI_NRET; i++) begin
-   //    assign  rvfi_instr_if[i].clk            = clknrst_if.clk;
-   //    assign  rvfi_instr_if[i].reset_n        = clknrst_if.reset_n;
-   //    assign  rvfi_instr_if[i].rvfi_valid     = rvfi_if.rvfi_o[i].valid;
-   //    assign  rvfi_instr_if[i].rvfi_order     = rvfi_if.rvfi_o[i].order;
-   //    assign  rvfi_instr_if[i].rvfi_insn      = rvfi_if.rvfi_o[i].insn;
-   //    assign  rvfi_instr_if[i].rvfi_trap      = (rvfi_if.rvfi_o[i].trap | (rvfi_if.rvfi_o[i].cause << 1));
-   //    assign  rvfi_instr_if[i].rvfi_halt      = rvfi_if.rvfi_o[i].halt;
-   //    assign  rvfi_instr_if[i].rvfi_intr      = rvfi_if.rvfi_o[i].intr;
-   //    assign  rvfi_instr_if[i].rvfi_mode      = rvfi_if.rvfi_o[i].mode;
-   //    assign  rvfi_instr_if[i].rvfi_ixl       = rvfi_if.rvfi_o[i].ixl;
-   //    assign  rvfi_instr_if[i].rvfi_pc_rdata  = rvfi_if.rvfi_o[i].pc_rdata;
-   //    assign  rvfi_instr_if[i].rvfi_pc_wdata  = rvfi_if.rvfi_o[i].pc_wdata;
-   //    assign  rvfi_instr_if[i].rvfi_rs1_addr  = rvfi_if.rvfi_o[i].rs1_addr;
-   //    assign  rvfi_instr_if[i].rvfi_rs1_rdata = rvfi_if.rvfi_o[i].rs1_rdata;
-   //    assign  rvfi_instr_if[i].rvfi_rs2_addr  = rvfi_if.rvfi_o[i].rs2_addr;
-   //    assign  rvfi_instr_if[i].rvfi_rs2_rdata = rvfi_if.rvfi_o[i].rs2_rdata;
-   //    assign  rvfi_instr_if[i].rvfi_rd1_addr  = rvfi_if.rvfi_o[i].rd_addr;
-   //    assign  rvfi_instr_if[i].rvfi_rd1_wdata = rvfi_if.rvfi_o[i].rd_wdata;
-   //    assign  rvfi_instr_if[i].rvfi_mem_addr  = rvfi_if.rvfi_o[i].mem_addr;
-   //    assign  rvfi_instr_if[i].rvfi_mem_rdata = rvfi_if.rvfi_o[i].mem_rdata;
-   //    assign  rvfi_instr_if[i].rvfi_mem_rmask = rvfi_if.rvfi_o[i].mem_rmask;
-   //    assign  rvfi_instr_if[i].rvfi_mem_wdata = rvfi_if.rvfi_o[i].mem_wdata;
-   //    assign  rvfi_instr_if[i].rvfi_mem_wmask = rvfi_if.rvfi_o[i].mem_wmask;
-   // end
 
    `RVFI_CSR_ASSIGN(fflags)
    `RVFI_CSR_ASSIGN(frm)
@@ -478,7 +448,6 @@ module uvmt_cva6_tb;
          $display("    ----------------------------------------------------------");
       end
       else begin
-
          $display("    FFFFFFFF   AAAAAA   IIIIII  LL        EEEEEEEE  DDDDDDD       ");
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
@@ -487,7 +456,6 @@ module uvmt_cva6_tb;
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA  IIIIII  LLLLLLLL  EEEEEEEE  DDDDDDD       ");
          $display("    ----------------------------------------------------------");
-
          if (sim_finished == 0) begin
             $display("                   SIMULATION FAILED - ABORTED              ");
          end
