@@ -489,7 +489,7 @@ task uvme_cva6_sb_c::run_phase(uvm_phase phase);
               end
               // Move instructions down the pipeline
               instr_prev = instr_trn.instr;
-          end
+          end    
       end
   join_none
 
